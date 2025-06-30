@@ -1,49 +1,34 @@
-📘 ElevateLabs_Task5 – SQL Joins Practice
-This task focuses on mastering SQL join operations to combine data from multiple related tables. In this example, we simulate a simple e-commerce scenario with Customers and Orders, and apply different types of joins like INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN.
+📘 ElevateLabs_Task5
+🔗 Task 5: SQL Joins – EcommerceDB
+
+This task demonstrates all major SQL JOIN types (INNER, LEFT, RIGHT, FULL OUTER) using a simplified E-commerce database system.
+
+It shows how to combine related data from multiple tables using SQL JOINs. The EcommerceDB schema was extended by adding a new Vendors table, which is linked to the existing Orders table through a foreign key.
 
 🎯 Objective
-Practice how to retrieve and merge data across multiple related tables using SQL JOIN operations.
+Learn how to merge data from related tables
 
-🛠️ Tools
+Use INNER, LEFT, RIGHT, and FULL OUTER JOINs
+
+Understand data relationships using foreign keys
+
+🛠 Tools Used
 MySQL Workbench
 
-(Alternatively: DB Browser for SQLite — with modifications)
+🧱 Schema Extension
+A new table Vendors was created and linked to the Orders table using a foreign key (vendor_id).
+Sample vendor records were inserted and matched with existing orders.
 
-📦 Deliverables
-A working SQL file that:
+🔍 JOINs Demonstrated
+INNER JOIN: Show orders along with vendor information
 
-Creates two related tables: Customers and Orders
+LEFT JOIN: Show all orders, including those without a vendor
 
-Demonstrates use of INNER, LEFT, RIGHT, and FULL OUTER joins
+RIGHT JOIN: Show all vendors, including those without any orders (MySQL only)
 
-Contains sample data inserts
+FULL OUTER JOIN: Simulated using UNION (MySQL only)
 
-🧠 Guide
-Create a simple relational schema with foreign key constraints.
+✅ Outcome: Mastery of Merging Data
+Gained hands-on experience with all key SQL JOIN types
 
-Populate the tables with sample data (e.g., customers and their orders).
-
-Execute join queries to demonstrate:
-
-INNER JOIN: only matching records
-
-LEFT JOIN: all records from Customers
-
-RIGHT JOIN: all records from Orders
-
-FULL OUTER JOIN: all records from both (simulated via UNION)
-
-Test each JOIN type to understand merging behavior.
-
-📄 File Description
-Schema:
-Customers
-
-customer_id (PK), name, email
-
-Orders
-
-order_id (PK), customer_id (FK), order_date, amount
-
-✅ Outcome
-Mastery of merging data
+Learned how to connect and retrieve data across normalized e-commerce tables
