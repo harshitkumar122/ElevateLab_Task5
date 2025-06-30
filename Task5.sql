@@ -1,55 +1,44 @@
-CREATE DATABASE IF NOT EXISTS EcommerceDB;
 USE EcommerceDB;
-SET FOREIGN_KEY_CHECKS = 0;
 
-DROP TABLE IF EXISTS Orders;
-DROP TABLE IF EXISTS Customers;
-SET FOREIGN_KEY_CHECKS = 1;
-
-CREATE TABLE Customers (
-    customer_id INT PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100)
+CREATE TABLE Vendors (
+    vendor_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    country VARCHAR(50)
 );
 
-CREATE TABLE Orders (
-    order_id INT PRIMARY KEY,
-    customer_id INT,
-    order_date DATE,
-    amount DECIMAL(10, 2),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
-);
+ALTER TABLE Orders
+ADD COLUMN vendor_id INT,
+ADD FOREIGN KEY (vendor_id) REFERENCES Vendors(vendor_id);
 
-INSERT INTO Customers (customer_id, name, email) VALUES
-(1, 'Amit Sharma', 'amit.sharma@gmail.com'),
-(2, 'Beena Verma', 'beena.v@gmail.com'),
-(3, 'Chetan Rao', 'chetan.rao@gmail.com');
+INSERT INTO Vendors (name, country) VALUES
+('Amazon', 'USA'),
+('Flipkart', 'India'),
+('Alibaba', 'China');
 
-INSERT INTO Orders (order_id, customer_id, order_date, amount) VALUES
-(201, 1, '2025-05-10', 3200.00),
-(202, 1, '2025-05-12', 450.00),
-(203, 2, '2025-05-15', 990.00);
+UPDATE Orders SET vendor_id = 1 WHERE order_id = 201;
+UPDATE Orders SET vendor_id = 2 WHERE order_id = 202;
+UPDATE Orders SET vendor_id = 3 WHERE order_id = 203;
 
--- INNER JOIN
-SELECT Customers.name, Orders.order_id, Orders.amount
-FROM Customers
-INNER JOIN Orders ON Customers.customer_id = Orders.customer_id;
+-- INNER JOIN:
+SELECT o.order_id, v.name AS vendor
+FROM Orders o
+INNER JOIN Vendors v ON o.vendor_id = v.vendor_id;
 
--- LEFT JOIN
-SELECT Customers.name, Orders.order_id, Orders.amount
-FROM Customers
-LEFT JOIN Orders ON Customers.customer_id = Orders.customer_id;
+-- LEFT JOIN:
+SELECT o.order_id, v.name AS vendor
+FROM Orders o
+LEFT JOIN Vendors v ON o.vendor_id = v.vendor_id;
 
--- RIGHT JOIN
-SELECT Customers.name, Orders.order_id, Orders.amount
-FROM Customers
-RIGHT JOIN Orders ON Customers.customer_id = Orders.customer_id;
+-- RIGHT JOIN:
+SELECT o.order_id, v.name AS vendor
+FROM Orders o
+RIGHT JOIN Vendors v ON o.vendor_id = v.vendor_id;
 
--- FULL OUTER JOIN
-SELECT Customers.name, Orders.order_id, Orders.amount
-FROM Customers
-LEFT JOIN Orders ON Customers.customer_id = Orders.customer_id
+-- FULL OUTER JOIN:
+SELECT o.order_id, v.name AS vendor
+FROM Orders o
+LEFT JOIN Vendors v ON o.vendor_id = v.vendor_id
 UNION
-SELECT Customers.name, Orders.order_id, Orders.amount
-FROM Customers
-RIGHT JOIN Orders ON Customers.customer_id = Orders.customer_id;
+SELECT o.order_id, v.name AS vendor
+FROM Orders o
+RIGHT JOIN Vendors v ON o.vendor_id = v.vendor_id;
